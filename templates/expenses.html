@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="container">
+
+    <h1 class="title">Your's expenses</h1>
+
+    <table class="expense-table">
+        <thead>
+            <th scope="col">id</th>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Date</th>
+        </thead>
+
+        <tbody>
+            {% for expense in expenses %}
+                <tr>
+                    <td>{{ expense.id }}</td>
+                    <td>{{ expense.name }}</td>
+                    <td>{{ expense.value }}</td>
+                    <td>{{ expense.date }}</td>
+                    <td>
+                        <a href="#" class="edit-btn">Edit</a>
+                        <a href="" class="delete-btn">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- DISPLAY EXPENSE DIAGRAM HERE WITH POSIBILITY FOR CHANGING TIME SCOPE -->
+
+    <div class="add-expense">
+
+        <form action="#" class="expense-form" method="POST">
+            {{ form.csrf_token }}
+
+            <div class="exp-name">
+                {{ form.name.label }}
+                {{ form.name }}
+            </div>
+
+            <div class="exp-value">
+                {{ form.value.label }}
+                {{ form.value }}
+            </div>
+
+            <div class="exp-date">
+                {{ form.date.label }}
+                {{ form.date }}
+            </div>
+
+            {{ form.submit(class_="form-btn") }}
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
