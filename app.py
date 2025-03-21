@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_migrate import Migrate
 from blueprints.databases import db
 from blueprints.main import main, login_manager
 
@@ -9,6 +10,8 @@ app.app_context().push()
 
 db.init_app(app)
 login_manager.init_app(app)
+
+migrate = Migrate(app, db)
 
 app.register_blueprint(main)
 

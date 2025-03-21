@@ -4,21 +4,21 @@ from wtforms.validators import DataRequired, EqualTo
 
 
 class LoginForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired])
-    password = PasswordField("Password", validators=[DataRequired])
+    username = StringField("Username", validators=[DataRequired()])
+    password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Login")
 
 
 class RegisterForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired])
-    email = StringField("Email", validators=[DataRequired])
-    password = PasswordField("Password", validators=[DataRequired])
-    confirm_password = PasswordField("Confirm password", validators=[DataRequired, EqualTo(password)])
+    username = StringField("Username", validators=[DataRequired()])
+    email = StringField("Email", validators=[DataRequired()])
+    password = PasswordField("Password", validators=[DataRequired()])
+    confirm_password = PasswordField("Confirm password", validators=[DataRequired(), EqualTo(password)])
     submit = SubmitField("Register")
 
 
 class ExpenseForm(FlaskForm):
-    name = StringField("Name", validators=[DataRequired])
-    value = StringField("Value", validators=[DataRequired])
-    date = DateField("Date", validators=[DataRequired])
+    name = StringField("Name", validators=[DataRequired()])
+    value = StringField("Value", validators=[DataRequired()])
+    date = DateField("Date", validators=[DataRequired()])
     submit = SubmitField("Add expense")
