@@ -2,6 +2,31 @@
 
 {% block content %}
 
+<section class="edit-exp-container">
+    <h1 class="title">Edit expense</h1>
 
+    <form action="{{ 'expenses.edit_expense', expense_id=expense.id }}" class="edit-expense">
+        {{ form.csrf_token }}
 
-{% endblock %}</form>
+        <div class="exp-name">
+            {{ form.name.label }}
+            {{ form.name(class_="form-control") }}
+        </div>
+
+        <div class="exp-value">
+            {{ form.value.label }}
+            {{ form.value(class_="form-control") }}
+        </div>
+
+        <div class="exp-date">
+            {{ form.date.label }}
+            {{ form.date(class_="form-control") }}
+        </div>
+
+        {{ form.submit(class_="form-btn") }}
+
+    </form>
+
+</section>
+
+{% endblock %}
