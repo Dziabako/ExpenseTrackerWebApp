@@ -78,3 +78,9 @@ a:hover {
     color: white;
     background-color: blue;
 }
+
+
+/* REGISTER PAGE */
+.reg-form {
+    margin-bottom: 2rem;
+}

@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<section class="reg-container">
-    <h1 class="title">Register</h1>
+<section class="container">
+    <h1 class="title">Register New user</h1>
 
     <form action="{{ url_for('main.register') }}" class="reg-form" method="post">
         {{ form.csrf_token }}
