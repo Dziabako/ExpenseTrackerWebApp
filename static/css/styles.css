@@ -84,3 +84,53 @@ a:hover {
 .reg-form {
     margin-bottom: 2rem;
 }
+
+
+/* EXPENSES PAGE */
+.container-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.date-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.date-btn {
+    width: 50%;
+    height: 1.5rem;
+    color: white;
+    background-color: black;
+    border-radius: 1rem;
+    margin-top: 2%;
+    font-size: 1rem;
+}
+
+.btn-reset {
+    width: 25%;
+    height: 1.5rem;
+    padding-top: 0.15rem;
+}
+
+.expense-table {
+    width: 60rem;
+    margin: 2rem;
+    padding: 0.5rem;
+    border: 2px solid black;
+    border-radius: 1rem;
+}
+
+.table-btn {
+    display: inline-block;
+    width: 4rem;
+    color: white;
+    background-color: black;
+    border-radius: 1rem;
+}

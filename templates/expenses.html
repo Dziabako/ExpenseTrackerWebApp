@@ -7,10 +7,10 @@
 
     <h1 class="title">Your's expenses</h1>
 
-    <form action="{{ url_for('expenses.expenses', user_id=current_user.id) }}" class="date-form" method="post">
+    <form action="{{ url_for('expense.expenses', user_id=current_user.id) }}" class="date-form" method="post">
         {{ form_date.csrf_token }}
 
-        <div class="form-group">>
+        <div class="form-group">
             {{ form_date.date_start.label }}
             {{ form_date.date_start }}
         </div>
@@ -20,7 +20,7 @@
             {{ form_date.date_end }}
         </div>
 
-        {{ form_date.submit(class_="form-btn") }}
+        {{ form_date.submit(class_="date-btn") }}
     </form>
 
     <a href="{{ url_for('expense.expenses', user_id=current_user.id) }}" class="btn-reset">Reset to Default</a>
@@ -39,10 +39,10 @@
                     <td>{{ expense.id }}</td>
                     <td>{{ expense.name }}</td>
                     <td>{{ expense.value }}</td>
-                    <td>{{ expense.date_posted }}</td>
+                    <td>{{ expense.date_posted.strftime('%Y-%m-%d') }}</td>
                     <td>
-                        <a href="#" class="edit-btn">Edit</a>
-                        <a href="" class="delete-btn">Delete</a>
+                        <a href="#" class="edit-btn table-btn">Edit</a>
+                        <a href="" class="delete-btn table-btn">Delete</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -50,17 +50,17 @@
     </table>
 
     <!-- DISPLAY EXPENSE DIAGRAM HERE WITH POSIBILITY FOR CHANGING TIME SCOPE -->
-     {{ if plot_filenam }}
-        <img src="{{ url_for('static', filename=plot_filename) }}" alt="Expense Plot" class="expense-chart">
-    {{ else }}
+     {% if expense_plot %}
+        <img src="{{ url_for('static', filename=expense_plot) }}" alt="Expense Plot" class="expense-chart">
+    {% else %}
         <div class="nodata">
             <p>No data avaible</p>
         </div>
-    {{ endif }}
+    {% endif %}
 
     <div class="add-expense">
 
-        <form action="{{ url_for('expenses.add_expense') }}" class="expense-form" method="POST">
+        <form action="{{ url_for('expense.add_expense') }}" class="expense-form" method="POST">
             {{ form.csrf_token }}
 
             <div class="exp-name">

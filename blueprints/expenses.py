@@ -18,7 +18,7 @@ def generate_expense_plot(expenses):
     plt.figure(figsize=(10, 6))
     plt.bar(labels, values, color='skyblue')
     plt.xlabel('Expense Name')
-    plt.ylabel('Expense Value')
+    plt.ylabel('Expense Value PLN')
     plt.title('Expenses Overview')
     plt.xticks(rotation=45, ha='right')
 
@@ -44,15 +44,15 @@ def expenses(user_id):
 
         user_expenses = Expenses.query.filter(Expenses.user_id == user_id, Expenses.date_posted >= start_date, Expenses.date_posted <= end_date).all()
 
-        plot_filename = generate_expense_plot(user_expenses)
-        return render_template("expenses.html", user_expenses=user_expenses, form=form_date, plot_filename=plot_filename)
+        expense_plot = generate_expense_plot(user_expenses)
+        return render_template("expenses.html", user_expenses=user_expenses, form=form_date, expense_plot=expense_plot)
 
     # Default bahaviour
     user_expenses = Expenses.query.filter(Expenses.user_id == user_id).all()
-    plot_filename = generate_expense_plot(user_expenses)
+    expense_plot = generate_expense_plot(user_expenses)
 
 
-    return render_template("expenses.html", user_expenses=user_expenses, form=form, form_date=form_date, plot_filename=plot_filename)
+    return render_template("expenses.html", user_expenses=user_expenses, form=form, form_date=form_date, expense_plot=expense_plot)
 
 
 @login_required

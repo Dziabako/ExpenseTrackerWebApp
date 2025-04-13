@@ -27,4 +27,4 @@ class ExpenseForm(FlaskForm):
 class ExpenseDateScopeForm(FlaskForm):
     date_start = DateField("Start date", validators=[DataRequired()])
     date_end = DateField("End date", validators=[DataRequired()])
-    sumbit = SubmitField("Filter")
+    submit = SubmitField("Filter")

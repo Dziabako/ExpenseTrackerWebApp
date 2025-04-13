@@ -18,10 +18,7 @@ def load_user(user_id):
 
 @main.route("/", methods=["GET", "POST"])
 def index():
-    if current_user.is_authenticated:
-        # return to user main page with user data
-        pass
-
+    
     form = LoginForm()
 
     if form.validate_on_submit():
@@ -30,13 +27,13 @@ def index():
         if user and check_password_hash(user.password, form.password.data):
             login_user(user)
             # return to user main page with user data
-            pass
+            return redirect(url_for("expense.expenses", user_id=user.id))
         elif user and not check_password_hash(user.password, form.password.data):
             flash("Incorrect password!")
-            return redirect(url_for("index"))
+            return redirect(url_for("main.index"))
         else:
             flash("User not found!")
-            return redirect(url_for("index"))
+            return redirect(url_for("main.index"))
         
 
     return render_template("index.html", form=form)
@@ -46,14 +43,13 @@ def index():
 def logout():
     logout_user()
     flash("You have been logged out!")
-    return redirect(url_for("index"))
+    return redirect(url_for("main.index"))
 
 
 @main.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
-        # return to user main page with user data
-        pass
+        return redirect(url_for("expense.expenses", user_id=current_user.id))
 
     form = RegisterForm()
 
@@ -66,13 +62,21 @@ def register():
 
         if user:
             flash("Username already exists! Log in now!")
-            redirect(url_for("index"))
+            redirect(url_for("main.index"))
         else:
-            new_user = User(username=username, password=generate_password_hash(password, method="sha256"), email=email)
+            new_user = User(username=username, password=generate_password_hash(password, method="pbkdf2:sha256"), email=email)
             db.session.add(new_user)
             db.session.commit()
             flash("Successfully registered! You can now log in!")
-            redirect(url_for("index"))
+            redirect(url_for("main.index"))
 
 
     return render_template("register.html", form=form)
+
+
+@main.route("/init_app")
+def init_app():
+    new_admin = User(username="Admin", password=generate_password_hash("admin", method="pbkdf2:sha256"), email="admin@email.com", admin=True)
+    db.session.add(new_admin)
+    db.session.commit()
+    return redirect(url_for("main.index"))
