@@ -17,11 +17,6 @@ a {
     border-radius: 1rem;
 }
 
-a:hover {
-    color: white;
-    background-color: blue;
-}
-
 
 /* MAIN PAIGE */
 .container {
@@ -72,11 +67,6 @@ a:hover {
     color: white;
     background-color: black;
     border-radius: 1rem;
-}
-
-.form-btn:hover {
-    color: white;
-    background-color: blue;
 }
 
 
@@ -133,4 +123,26 @@ a:hover {
     color: white;
     background-color: black;
     border-radius: 1rem;
+}
+
+.add-expense {
+    width: 35%;
+    margin-bottom: 2rem;
+}
+
+.new-expense {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    justify-content: center;
+    align-items: center;
+    padding: 0.25rem;
+}
+
+
+/* HOVERS */
+a:hover,
+.form-btn:hover,
+.date-btn:hover {
+    color: white;
+    background-color: blue;
 }

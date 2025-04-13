@@ -42,7 +42,7 @@
                     <td>{{ expense.date_posted.strftime('%Y-%m-%d') }}</td>
                     <td>
                         <a href="#" class="edit-btn table-btn">Edit</a>
-                        <a href="" class="delete-btn table-btn">Delete</a>
+                        <a href="#" class="delete-btn table-btn">Delete</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -60,20 +60,22 @@
 
     <div class="add-expense">
 
+        <h3 class="title">Add new expense</h3>
+
         <form action="{{ url_for('expense.add_expense') }}" class="expense-form" method="POST">
             {{ form.csrf_token }}
 
-            <div class="exp-name">
+            <div class="new-expense">
                 {{ form.name.label }}
                 {{ form.name }}
             </div>
 
-            <div class="exp-value">
+            <div class="new-expense">
                 {{ form.value.label }}
                 {{ form.value }}
             </div>
 
-            <div class="exp-date">
+            <div class="new-expense"">
                 {{ form.date.label }}
                 {{ form.date }}
             </div>
