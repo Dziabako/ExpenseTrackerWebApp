@@ -72,11 +72,3 @@ def register():
 
 
     return render_template("register.html", form=form)
-
-
-@main.route("/init_app")
-def init_app():
-    new_admin = User(username="Admin", password=generate_password_hash("admin", method="pbkdf2:sha256"), email="admin@email.com", admin=True)
-    db.session.add(new_admin)
-    db.session.commit()
-    return redirect(url_for("main.index"))
