@@ -27,7 +27,7 @@ a {
     align-items: center;
     margin: 8% 35%;
     border: 2px solid black;
-    border-radius: 15%;
+    border-radius: 2rem;
 }
 
 .title {
@@ -66,7 +66,7 @@ a {
     width: 50%;
     color: white;
     background-color: black;
-    border-radius: 1rem;
+    border-radius: 2rem;
 }
 
 
@@ -98,7 +98,7 @@ a {
     height: 1.5rem;
     color: white;
     background-color: black;
-    border-radius: 1rem;
+    border-radius: 2rem;
     margin-top: 2%;
     font-size: 1rem;
 }
@@ -114,7 +114,7 @@ a {
     margin: 2rem;
     padding: 0.5rem;
     border: 2px solid black;
-    border-radius: 1rem;
+    border-radius: 2rem;
 }
 
 .table-btn {
@@ -122,7 +122,7 @@ a {
     width: 4rem;
     color: white;
     background-color: black;
-    border-radius: 1rem;
+    border-radius: 2rem;
 }
 
 .add-expense {
@@ -136,6 +136,26 @@ a {
     justify-content: center;
     align-items: center;
     padding: 0.25rem;
+}
+
+/* EDIT EXPENSE */
+.edit-exp-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin: 5% 35%;
+    border: 2px solid black;
+    border-radius: 2rem;
+    height: 20rem;
+}
+
+.edit-expense {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 

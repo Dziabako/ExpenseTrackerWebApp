@@ -6,6 +6,7 @@
 <div class="container-main">
 
     <h1 class="title">Your's expenses</h1>
+    <a href="{{ url_for('main.logout') }}" class="btn-reset">Click here to log out!</a>
 
     <form action="{{ url_for('expense.expenses', user_id=current_user.id) }}" class="date-form" method="post">
         {{ form_date.csrf_token }}
@@ -27,7 +28,6 @@
 
     <table class="expense-table">
         <thead>
-            <th scope="col">id</th>
             <th>Name</th>
             <th>Value</th>
             <th>Date</th>
@@ -36,13 +36,12 @@
         <tbody>
             {% for expense in user_expenses %}
                 <tr>
-                    <td>{{ expense.id }}</td>
                     <td>{{ expense.name }}</td>
                     <td>{{ expense.value }}</td>
                     <td>{{ expense.date_posted.strftime('%Y-%m-%d') }}</td>
                     <td>
-                        <a href="#" class="edit-btn table-btn">Edit</a>
-                        <a href="#" class="delete-btn table-btn">Delete</a>
+                        <a href="{{ url_for('expense.edit_expense', expense_id=expense.id) }}" class="edit-btn table-btn">Edit</a>
+                        <a href="{{ url_for('expense.delete_expense', expense_id=expense.id) }}" class="delete-btn table-btn">Delete</a>
                     </td>
                 </tr>
             {% endfor %}

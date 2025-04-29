@@ -16,7 +16,7 @@ def generate_expense_plot(expenses):
 
     # Create the plot
     plt.figure(figsize=(10, 6))
-    plt.bar(labels, values, color='skyblue')
+    plt.bar(labels, values, color='skyblue', width=0.4, align='center')
     plt.xlabel('Expense Name')
     plt.ylabel('Expense Value PLN')
     plt.title('Expenses Overview')
@@ -32,7 +32,7 @@ def generate_expense_plot(expenses):
 
 
 @login_required
-@expense.route("/expenses/<int:user_id>")
+@expense.route("/expenses/<int:user_id>", methods=["GET", "POST"])
 def expenses(user_id):
     form_date = ExpenseDateScopeForm()
     form = ExpenseForm()
@@ -42,13 +42,19 @@ def expenses(user_id):
         start_date = form_date.date_start.data
         end_date = form_date.date_end.data
 
-        user_expenses = Expenses.query.filter(Expenses.user_id == user_id, Expenses.date_posted >= start_date, Expenses.date_posted <= end_date).all()
+        user_expenses = Expenses.query.filter(Expenses.user_id == user_id, Expenses.date_posted >= start_date, Expenses.date_posted <= end_date).order_by(Expenses.date_posted).all()
 
         expense_plot = generate_expense_plot(user_expenses)
-        return render_template("expenses.html", user_expenses=user_expenses, form=form_date, expense_plot=expense_plot)
+        return render_template(
+            "expenses.html",
+            user_expenses=user_expenses,
+            form=form,
+            form_date=form_date,
+            expense_plot=expense_plot
+        )
 
     # Default bahaviour
-    user_expenses = Expenses.query.filter(Expenses.user_id == user_id).all()
+    user_expenses = Expenses.query.filter(Expenses.user_id == user_id).order_by(Expenses.date_posted).all()
     expense_plot = generate_expense_plot(user_expenses)
 
 
@@ -88,7 +94,7 @@ def delete_expense(expense_id):
 @expense.route("/edit_expense/<int:expense_id>", methods=["GET", "POST"])
 def edit_expense(expense_id):
     expense = Expenses.query.filter(Expenses.id == expense_id).first()
-    form = ExpenseForm()
+    form = ExpenseForm(obj=expense)
 
     if form.validate_on_submit():
         expense.name = form.name.data

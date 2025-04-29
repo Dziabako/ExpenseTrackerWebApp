@@ -5,20 +5,20 @@
 <section class="edit-exp-container">
     <h1 class="title">Edit expense</h1>
 
-    <form action="{{ 'expenses.edit_expense', expense_id=expense.id }}" class="edit-expense">
+    <form action="{{ url_for('expense.edit_expense', expense_id=expense.id) }}" class="edit-expense" method="post">
         {{ form.csrf_token }}
 
-        <div class="exp-name">
+        <div class="new-expense">
             {{ form.name.label }}
             {{ form.name(class_="form-control") }}
         </div>
 
-        <div class="exp-value">
+        <div class="new-expense">
             {{ form.value.label }}
             {{ form.value(class_="form-control") }}
         </div>
 
-        <div class="exp-date">
+        <div class="new-expense">
             {{ form.date.label }}
             {{ form.date(class_="form-control") }}
         </div>

@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, flash, redirect, url_for
-from flask_login import login_user, logout_user, current_user, LoginManager
+from flask_login import login_user, logout_user, current_user, LoginManager, login_required
 from blueprints.forms import LoginForm, RegisterForm
 from blueprints.databases import User, db
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -39,6 +39,7 @@ def index():
     return render_template("index.html", form=form)
 
 
+@login_required
 @main.route("/logout")
 def logout():
     logout_user()
@@ -62,13 +63,15 @@ def register():
 
         if user:
             flash("Username already exists! Log in now!")
-            redirect(url_for("main.index"))
+            return redirect(url_for("main.index"))
         else:
-            new_user = User(username=username, password=generate_password_hash(password, method="pbkdf2:sha256"), email=email)
+            new_user = User(username=username, password=generate_password_hash(password), email=email)
             db.session.add(new_user)
             db.session.commit()
             flash("Successfully registered! You can now log in!")
-            redirect(url_for("main.index"))
+            return redirect(url_for("main.index"))
+    else:
+        print(form.errors)
 
 
     return render_template("register.html", form=form)

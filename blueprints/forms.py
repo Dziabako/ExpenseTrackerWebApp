@@ -13,7 +13,7 @@ class RegisterForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     email = StringField("Email", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
-    confirm_password = PasswordField("Confirm password", validators=[DataRequired(), EqualTo(password)])
+    confirm_password = PasswordField("Confirm password", validators=[DataRequired(), EqualTo("password")])
     submit = SubmitField("Register")
 
 
@@ -25,6 +25,6 @@ class ExpenseForm(FlaskForm):
 
 
 class ExpenseDateScopeForm(FlaskForm):
-    date_start = DateField("Start date", validators=[DataRequired()])
-    date_end = DateField("End date", validators=[DataRequired()])
+    date_start = DateField("Start Date", validators=[DataRequired()], format="%Y-%m-%d")
+    date_end = DateField("End Date", validators=[DataRequired()], format="%Y-%m-%d")
     submit = SubmitField("Filter")
